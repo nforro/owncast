@@ -82,6 +82,11 @@ func HandleConn(c *rtmp.Conn, nc net.Conn) {
 	syscall.Mkfifo(pipePath, 0666)
 
 	_transcoder = ffmpeg.NewTranscoder()
+	// Get told when the transcoder stops
+	_transcoder.TranscoderCompleted = func(error) {
+		core.SetStreamAsDisconnected()
+	}
+
 	go _transcoder.Start()
 
 	_isConnected = true
@@ -125,8 +130,7 @@ func handleDisconnect(conn net.Conn) {
 	conn.Close()
 	_pipe.Close()
 	_isConnected = false
-	_transcoder.Stop()
-	core.SetStreamAsDisconnected()
+	// _transcoder.Stop()
 }
 
 //IsConnected gets whether there is an rtmp connection or not

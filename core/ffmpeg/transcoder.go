@@ -24,6 +24,7 @@ type Transcoder struct {
 	hlsPlaylistLength    int
 	segmentLengthSeconds int
 	appendToStream       bool
+	TranscoderCompleted  func(error)
 }
 
 // HLSVariant is a combination of settings that results in a single HLS stream
@@ -83,9 +84,15 @@ func (t *Transcoder) Start() {
 
 	_commandExec = exec.Command("sh", "-c", command)
 	err := _commandExec.Start()
+	err = _commandExec.Wait()
 	if err != nil {
+		log.Errorln(err)
 		log.Errorln("Transcoder error.  See transcoder.log for full output to debug.")
 		log.Panicln(err, command)
+	}
+
+	if t.TranscoderCompleted != nil {
+		t.TranscoderCompleted(err)
 	}
 
 	return
