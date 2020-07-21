@@ -617,3 +617,11 @@ h2 {
   height: 170px;
   border-radius: 15px;
 }
+
+/* Emoji picker */
+#emoji-button {
+  position: relative;
+  top: -65px;
+  right: 10px;
+  cursor: pointer;
+}
