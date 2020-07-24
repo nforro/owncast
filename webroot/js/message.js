@@ -192,7 +192,11 @@ class MessagingInterface {
 	}
 
 	handleMessageInputKeydown(event) {
-		var okCodes = [37,38,39,40,16,91,18,46,8];
+		var okCodes = [37, 38, 39, 40, 16, 91, 18, 46, 8];
+		if (!this.formMessageInput.value) {
+			return;
+		}
+
 		var value = this.formMessageInput.value.trim();
 		var numCharsLeft = this.maxMessageLength - value.length;
 		if (event.keyCode === 13) { // enter
@@ -222,7 +226,9 @@ class MessagingInterface {
 	}
 
 	handleSubmitChatButton(event) {
-		var value = this.formMessageInput.value.trim();
+		var value = this.formMessageInput.innerHTML.trim();
+		this.formMessageInput.innerHTML = "";
+
 		if (value) {
 			this.submitChat(value);
 			event.preventDefault();
@@ -264,6 +270,7 @@ class MessagingInterface {
 	}
 
 	disableChat() {
+		return
 		if (this.formMessageInput) {
 			this.formMessageInput.disabled = true;
 			this.formMessageInput.placeholder = CHAT_PLACEHOLDER_OFFLINE;
