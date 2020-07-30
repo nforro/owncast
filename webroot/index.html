@@ -28,7 +28,6 @@
   <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet" />
   <script src="//unpkg.com/video.js@7.9.2/dist/video.js"></script>
   <script src="//unpkg.com/showdown/dist/showdown.min.js"></script>
-  <script src="vendor/autolink.js"></script>
 
   <link href="./styles/layout.css" rel="stylesheet" />
 </head>
@@ -158,7 +157,6 @@
             <input type="hidden" name="inputAuthor" id="self-message-author" />
             
             <textarea
-              disabled
               id="message-body-form"
               placeholder="Message"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-2 px-2 my-2 focus:bg-white"
@@ -186,7 +184,10 @@
   <script src="js/components.js"></script>
   <script src="js/player.js"></script>
   <script src="js/app.js?v=2"></script>
-  <script>
+  <script type="module">
+    import {linkifyStr} from '/js/chat/autolink.js';
+    window.linkifyStr = linkifyStr;
+
     (function () {
       const app = new Owncast();
       app.init();
