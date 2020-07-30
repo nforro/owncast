@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gabek/owncast/log"
 
 	"github.com/gabek/owncast/config"
 	"github.com/gabek/owncast/controllers"

@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/gabek/owncast/config"
+	log "github.com/gabek/owncast/log"
 	"github.com/gabek/owncast/models"
 	"github.com/gabek/owncast/utils"
 	_ "github.com/mattn/go-sqlite3"
-	log "github.com/sirupsen/logrus"
 )
 
 var _db *sql.DB

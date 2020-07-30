@@ -5,12 +5,16 @@ go 1.14
 require (
 	github.com/aws/aws-sdk-go v1.32.1
 	github.com/kr/pretty v0.2.0 // indirect
+	github.com/mackerelio/go-osstat v0.1.0
 	github.com/mattn/go-sqlite3 v1.14.0
 	github.com/mssola/user_agent v0.5.2
+	github.com/mum4k/termdash v0.12.1
 	github.com/nareix/joy5 v0.0.0-20200710135721-d57196c8d506
+	github.com/prometheus/common v0.10.0
 	github.com/radovskyb/watcher v1.0.7
 	github.com/sirupsen/logrus v1.6.0
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf
+	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
 	golang.org/x/sys v0.0.0-20200420163511-1957bb5e6d1f // indirect
 	golang.org/x/text v0.3.2 // indirect

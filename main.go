@@ -4,12 +4,13 @@ import (
 	"flag"
 	"fmt"
 
+	log "github.com/gabek/owncast/log"
 	"github.com/sirupsen/logrus"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/gabek/owncast/config"
 	"github.com/gabek/owncast/core"
 	"github.com/gabek/owncast/router"
+	"github.com/gabek/owncast/termui"
 )
 
 // the following are injected at build-time
@@ -39,9 +40,9 @@ func main() {
 	}
 
 	if *enableVerboseLogging {
-		log.SetLevel(log.TraceLevel)
+		logrus.SetLevel(logrus.TraceLevel)
 	} else {
-		log.SetLevel(log.InfoLevel)
+		logrus.SetLevel(logrus.InfoLevel)
 	}
 
 	if err := config.Load(*configFile, getVersion()); err != nil {
@@ -55,6 +56,8 @@ func main() {
 		config.Config.ChatDatabaseFilePath = "chat.db"
 	}
 
+	go termui.Setup(getVersion())
+
 	// starts the core
 	if err := core.Start(); err != nil {
 		log.Error("failed to start the core package")
@@ -65,7 +68,6 @@ func main() {
 		log.Error("failed to start/run the router")
 		panic(err)
 	}
-
 }
 
 //getVersion gets the version string
@@ -74,7 +76,7 @@ func getVersion() string {
 }
 
 func configureLogging() {
-	log.SetFormatter(&log.TextFormatter{
+	logrus.SetFormatter(&logrus.TextFormatter{
 		FullTimestamp: true,
 	})
 }

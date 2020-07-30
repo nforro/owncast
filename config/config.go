@@ -2,10 +2,12 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
+	"strings"
 
+	log "github.com/gabek/owncast/log"
 	"github.com/gabek/owncast/utils"
-	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 )
 
@@ -218,4 +220,34 @@ func Load(filePath string, versionInfo string) error {
 	}
 
 	return Config.verifySettings()
+}
+
+func (q *StreamQuality) String() string {
+	qualityStringComponents := []string{}
+	if q.VideoBitrate != 0 {
+		qualityStringComponents = append(qualityStringComponents, fmt.Sprintf("%dk", q.VideoBitrate))
+	}
+
+	if q.IsVideoPassthrough {
+		qualityStringComponents = append(qualityStringComponents, "Video passthrough enabled")
+	}
+
+	qualityStringComponents = append(qualityStringComponents, fmt.Sprintf("Encoder: %s", q.EncoderPreset))
+
+	if q.ScaledWidth != 0 {
+		qualityStringComponents = append(qualityStringComponents, fmt.Sprintf("Width: %d", q.ScaledWidth))
+	}
+	if q.ScaledHeight != 0 {
+		qualityStringComponents = append(qualityStringComponents, fmt.Sprintf("Height: %d", q.ScaledHeight))
+	}
+
+	if q.Framerate != 0 {
+		qualityStringComponents = append(qualityStringComponents, fmt.Sprintf("%dfps", q.ScaledHeight))
+	}
+
+	if q.IsAudioPassthrough {
+		qualityStringComponents = append(qualityStringComponents, "Audio passthrough enabled")
+	}
+
+	return strings.Join(qualityStringComponents, ". ")
 }

@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gabek/owncast/log"
 
 	"github.com/gabek/owncast/config"
 	"github.com/gabek/owncast/utils"

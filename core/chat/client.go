@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gabek/owncast/log"
 	"golang.org/x/net/websocket"
 
 	"github.com/gabek/owncast/models"

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gabek/owncast/log"
 
 	"github.com/radovskyb/watcher"
 
