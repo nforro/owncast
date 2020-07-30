@@ -623,3 +623,8 @@ h2 {
   height: 170px;
   border-radius: 15px;
 }
+
+.message-text code {
+  background-color:darkslategrey;
+  padding: 3px;
+}
